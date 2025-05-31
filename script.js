@@ -1,5 +1,5 @@
 //API Key
-const apiKey =  '[Your Key];
+const apiKey =  '[Your Key]';
 // Declaration of variables
 const input = document.querySelector('#city-input');
 const tempContainer =  document.querySelector('#temperature');
