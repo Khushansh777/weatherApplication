@@ -10,6 +10,8 @@ const humidityConstainer = document.querySelector('#humidity');
 const pressureontainer = document.querySelector('#pressure');
 const searchBtn  = document.querySelector('#search-btn');
 const weatherBoxContainer = document.querySelector('.weather-box');
+const imageContainer =  document.querySelector('#weather-icon');
+let weatherdes;
 
 //fetch Data
 const fetchData = async (param)=> {
@@ -34,14 +36,19 @@ const fetchData = async (param)=> {
 if(input.value.trim() === ''){
     weatherBoxContainer.style.display =  'none'
 }
-// fetchData()
+
+// make Search button work
 
 searchBtn.addEventListener('click', async() => {
+    fetchAndDisplayData()
+})
+
+// function to fetch Data and display it
+async function fetchAndDisplayData(){
 const inputVal = input.value.trim();
-const inputVal2 = input.value;
 if(inputVal == ''){
     weatherBoxContainer.style.display = 'none'
-    alert('PLs write a Valid City name')
+    alert('PLs write a Valid City name');
     return
 }
 try{
@@ -54,18 +61,32 @@ try{
     windContainer.innerHTML = `${data.wind.speed} kmph`;
     humidityConstainer.innerHTML = `${data.main.humidity} %`;
     pressureontainer.innerHTML = data.main.pressure;
+    
+    imageContainer.innerHTML = ` <img src="${weatherdes}" alt="weather icon" id="weather-icon">`
+    
     }
 catch(error){
     console.log('error', error);
+}   
+    
 }
-    })
+    
+
 
 // convert into Celsius
 function fahrenheitToCelsius(f) {
   return Math.round(f - 273.15 );
 }
 
-console.log(fahrenheitToCelsius(297.7))
+console.log(fahrenheitToCelsius(297.7));
+
+// press enter to work functionality
+
+input.addEventListener('keypress', (event) =>{
+    if(event.key === "Enter"){
+        fetchAndDisplayData();
+    }
+})
 
 
 
